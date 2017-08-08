@@ -1,4 +1,4 @@
-package com.demo.quickStart.conf;
+package com.ss.quickStart.conf;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

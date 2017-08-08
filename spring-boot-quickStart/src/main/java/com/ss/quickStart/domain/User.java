@@ -1,4 +1,4 @@
-package com.demo.quickStart.domain;
+package com.ss.quickStart.domain;
 
 /**
  * Created by wsy on 2017/8/8.

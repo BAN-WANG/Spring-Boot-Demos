@@ -1,7 +1,7 @@
-package com.demo.quickStart.web;
+package com.ss.quickStart.web;
 
-import com.demo.quickStart.conf.PropertiesValues;
-import com.demo.quickStart.domain.User;
+import com.ss.quickStart.conf.PropertiesValues;
+import com.ss.quickStart.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
