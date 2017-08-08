@@ -17,7 +17,7 @@ public class UserController {
     @RequestMapping("getUser.do")
     public User getUser(){
         User user = new User();
-        user.setName(propertiesValues.getUserName());
+        user.setName(propertiesValues.getUserName()+"-SS");
         user.setSex(1);
         return user;
     }
