@@ -3,6 +3,7 @@ package com.ss.quickStart.web;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ss.quickStart.conf.PropertiesValues;
+import com.ss.quickStart.domain.Order;
 import com.ss.quickStart.domain.User;
 import com.ss.quickStart.domain.dto.UserListDTO;
 import com.ss.quickStart.service.UserService;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.text.MessageFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -76,5 +79,22 @@ public class UserController {
         List<User> list = userService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
+    }
+
+    @RequestMapping("/listByCondition")
+    public PageInfo listByCondition(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+        PageHelper.startPage(page, size);
+        List<User> list = userService.listByCondition();
+        PageInfo pageInfo = new PageInfo(list);
+        return pageInfo;
+    }
+
+    //localhost:8080/user/addOrder.do?money=998
+    @RequestMapping("user/addOrder.do")
+    public Boolean addOrder(BigDecimal money){
+        Order order = new Order();
+        order.setUserId(1L);
+        order.setOrderMoney(money);
+        return userService.addOrder(order);
     }
 }
