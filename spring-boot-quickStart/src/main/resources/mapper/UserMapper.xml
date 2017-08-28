@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ss.quickStart.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.ss.quickStart.domain.User">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+  </resultMap>
+
+  <resultMap id="userOrdersMap" type="com.ss.quickStart.domain.dto.UserOrdersDTO">
+    <id column="id" property="id" />
+    <result column="userName"  property="userName" />
+    <collection  property="orderList" column="id" resultMap="orderMap" />
+  </resultMap>
+
+    <resultMap id="orderMap" type="com.ss.quickStart.domain.Order">
+        <result column="orderId"  property="id" />
+        <result column="userId"  property="userId" />
+        <result column="orderMoney"  property="orderMoney" />
+        <result column="orderTime"  property="orderTime" />
+    </resultMap>
+
+  <select id="qryUserOrders3" resultMap="userOrdersMap">
+    select
+	  t.id,
+	  name userName,
+	  t1.id orderId,
+	  t1.user_id userId,
+	  t1.order_money orderMoney,
+	  t1.order_time orderTime
+    from user t left join t_order t1 on t.id=t1.user_id
+    where t.id=#{userId}
+    order by order_time desc
+    limit 2
+  </select>
+</mapper>

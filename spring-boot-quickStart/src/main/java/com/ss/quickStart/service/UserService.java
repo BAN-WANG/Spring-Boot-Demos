@@ -1,9 +1,11 @@
 package com.ss.quickStart.service;
 
+import com.github.pagehelper.PageHelper;
 import com.ss.quickStart.dao.OrderMapper;
 import com.ss.quickStart.dao.UserMapper;
 import com.ss.quickStart.domain.Order;
 import com.ss.quickStart.domain.User;
+import com.ss.quickStart.domain.dto.UserOrdersDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -53,5 +55,34 @@ public class UserService {
     public Boolean addOrder(Order order){
        orderMapper.insert(order);
         return true;
+    }
+
+    public UserOrdersDTO qryUserOrders(Long userId){
+        UserOrdersDTO userOrdersDTO = new UserOrdersDTO();
+
+        //步骤一：查询用户信息
+        User user = userMapper.selectByPrimaryKey(userId);
+        if(user == null){
+            return userOrdersDTO;
+        }
+        userOrdersDTO.setId(userId);
+        userOrdersDTO.setUserName(user.getName());
+
+        //步骤二：查询用户最近2个订单
+        PageHelper.startPage(1, 2);
+        Condition condition = new Condition(Order.class);
+        condition.createCriteria().andEqualTo("userId",userId);
+        condition.setOrderByClause("order_time desc");
+        List<Order> orderList = orderMapper.selectByCondition(condition);
+        userOrdersDTO.setOrderList(orderList);
+        return userOrdersDTO;
+    }
+
+    public UserOrdersDTO qryUserOrders2(Long userId){
+        return userMapper.qryUserOrders2(userId);
+    }
+
+    public UserOrdersDTO qryUserOrders3(Long userId){
+        return userMapper.qryUserOrders3(userId);
     }
 }

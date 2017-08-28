@@ -6,6 +6,7 @@ import com.ss.quickStart.conf.PropertiesValues;
 import com.ss.quickStart.domain.Order;
 import com.ss.quickStart.domain.User;
 import com.ss.quickStart.domain.dto.UserListDTO;
+import com.ss.quickStart.domain.dto.UserOrdersDTO;
 import com.ss.quickStart.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -96,5 +97,23 @@ public class UserController {
         order.setUserId(1L);
         order.setOrderMoney(money);
         return userService.addOrder(order);
+    }
+
+    //localhost:8080/user/qryUserOrders.do?userId=1
+    @RequestMapping("user/qryUserOrders.do")
+    public UserOrdersDTO qryUserOrders(Long userId){
+        return userService.qryUserOrders(userId);
+    }
+
+    //localhost:8080/user/qryUserOrders2.do?userId=1
+    @RequestMapping("user/qryUserOrders2.do")
+    public UserOrdersDTO qryUserOrders2(Long userId){
+        return userService.qryUserOrders2(userId);
+    }
+
+    //localhost:8080/user/qryUserOrders3.do?userId=1
+    @RequestMapping("user/qryUserOrders3.do")
+    public UserOrdersDTO qryUserOrders3(Long userId){
+        return userService.qryUserOrders3(userId);
     }
 }
