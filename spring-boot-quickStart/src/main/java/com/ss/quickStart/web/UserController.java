@@ -2,6 +2,7 @@ package com.ss.quickStart.web;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ss.quickStart.annotation.Log;
 import com.ss.quickStart.conf.PropertiesValues;
 import com.ss.quickStart.domain.Order;
 import com.ss.quickStart.domain.User;
@@ -70,6 +71,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("user/batchAdd.do")
+    @Log
     public Boolean batchAdd(UserListDTO userListDTO){
         return userService.batchAdd(userListDTO.getUserList());
     }
@@ -83,7 +85,7 @@ public class UserController {
     }
 
     @RequestMapping("/listByCondition")
-    public PageInfo listByCondition(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public PageInfo listByCondition(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer size) {
         PageHelper.startPage(page, size);
         List<User> list = userService.listByCondition();
         PageInfo pageInfo = new PageInfo(list);
@@ -101,6 +103,7 @@ public class UserController {
 
     //localhost:8080/user/qryUserOrders.do?userId=1
     @RequestMapping("user/qryUserOrders.do")
+    @Log
     public UserOrdersDTO qryUserOrders(Long userId){
         return userService.qryUserOrders(userId);
     }
