@@ -1,5 +1,7 @@
 package com.ss.quickStart.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
@@ -23,6 +25,7 @@ public class Order {
     private BigDecimal orderMoney;
 
     @Column(name = "order_time")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date orderTime;
 
     /**

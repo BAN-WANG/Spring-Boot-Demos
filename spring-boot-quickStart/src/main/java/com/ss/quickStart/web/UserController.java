@@ -116,4 +116,10 @@ public class UserController {
     public UserOrdersDTO qryUserOrders3(Long userId){
         return userService.qryUserOrders3(userId);
     }
+
+    //localhost:8080/testException?id=ss
+    @RequestMapping("testException")
+    public Boolean testException(Long id){
+        return userService.testException(id);
+    }
 }

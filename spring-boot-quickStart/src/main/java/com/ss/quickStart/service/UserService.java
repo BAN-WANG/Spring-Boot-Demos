@@ -1,6 +1,7 @@
 package com.ss.quickStart.service;
 
 import com.github.pagehelper.PageHelper;
+import com.ss.quickStart.core.BizException;
 import com.ss.quickStart.dao.OrderMapper;
 import com.ss.quickStart.dao.UserMapper;
 import com.ss.quickStart.domain.Order;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Service
 public class UserService {
-    private static final Logger  LOG = LoggerFactory.getLogger(UserService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
     @Resource
     private UserMapper userMapper;
     @Resource
@@ -84,5 +85,12 @@ public class UserService {
 
     public UserOrdersDTO qryUserOrders3(Long userId){
         return userMapper.qryUserOrders3(userId);
+    }
+
+    public Boolean testException(Long id) throws BizException{
+        if(true){
+            throw new BizException(10000,"业务校验不通过");
+        }
+        return true;
     }
 }
