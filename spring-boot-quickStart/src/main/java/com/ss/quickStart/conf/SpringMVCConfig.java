@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 @Configuration
@@ -27,6 +28,7 @@ public class SpringMVCConfig extends WebMvcConfigurerAdapter{
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter4 fastJsonConverter = new FastJsonHttpMessageConverter4();
+        fastJsonConverter.setDefaultCharset(Charset.forName("UTF-8"));
         converters.add(fastJsonConverter);
     }
 
